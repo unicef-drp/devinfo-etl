@@ -95,34 +95,38 @@ def extract_dataframe(access_database, lang):
 
     # extracts the sectors table
     dfSectors = db.get_dataframe(db_read.Q_SECTORS, lang)
-    dfSectors = dfSectors.groupby('Indicator_NId').apply(lambda x: ','.join(x.SECTOR))
-    tmpdf = pd.DataFrame()
-    tmpdf['SECTOR'] = dfSectors
-    dfSectors = tmpdf
+    if len(dfSectors) > 0:
+        dfSectors = dfSectors.groupby('Indicator_NId').apply(lambda x: ','.join(x.SECTOR))
+        tmpdf = pd.DataFrame()
+        tmpdf['SECTOR'] = dfSectors
+        dfSectors = tmpdf
 
     # extracts the subsectors table
     dfSubsectors = db.get_dataframe(db_read.Q_SUBSECTORS, lang)
-    dfSubsectors = dfSubsectors.groupby('Indicator_NId').apply(lambda x: ','.join(x.SUBSECTOR))
-    tmpdf = pd.DataFrame()
-    tmpdf['SUBSECTOR'] = dfSubsectors
-    dfSubsectors = tmpdf
+    if len(dfSubsectors) > 0:
+        dfSubsectors = dfSubsectors.groupby('Indicator_NId').apply(lambda x: ','.join(x.SUBSECTOR))
+        tmpdf = pd.DataFrame()
+        tmpdf['SUBSECTOR'] = dfSubsectors
+        dfSubsectors = tmpdf
 
     # extracts the sources table
     dfSources = db.get_dataframe(db_read.Q_SOURCES, lang)
 
     # extracts the source agency table
     dfSource_agency = db.get_dataframe(db_read.Q_SOURCE_AGENCY, lang)
-    dfSource_agency = dfSource_agency.groupby('Indicator_NId').apply(lambda x: ','.join(x.SOURCE_AGENCY))
-    tmpdf = pd.DataFrame()
-    tmpdf['SOURCE_AGENCY'] = dfSource_agency
-    dfSource_agency = tmpdf
+    if len(dfSource_agency) > 0:
+        dfSource_agency = dfSource_agency.groupby('Indicator_NId').apply(lambda x: ','.join(x.SOURCE_AGENCY))
+        tmpdf = pd.DataFrame()
+        tmpdf['SOURCE_AGENCY'] = dfSource_agency
+        dfSource_agency = tmpdf
 
     # extracts the agency table
     dfAgency = db.get_dataframe(db_read.Q_AGENCY, lang)
-    dfAgency = dfAgency.groupby('Indicator_NId').apply(lambda x: ','.join(x.AGENCY))
-    tmpdf = pd.DataFrame()
-    tmpdf['AGENCY'] = dfAgency
-    dfAgency = tmpdf
+    if len(dfAgency) > 0:
+        dfAgency = dfAgency.groupby('Indicator_NId').apply(lambda x: ','.join(x.AGENCY))
+        tmpdf = pd.DataFrame()
+        tmpdf['AGENCY'] = dfAgency
+        dfAgency = tmpdf
 
     # extracts the goals table
     dfGoals = db.get_dataframe(db_read.Q_GOALS, lang)
@@ -133,10 +137,11 @@ def extract_dataframe(access_database, lang):
 
     # extracts the themes table
     dfThemes = db.get_dataframe(db_read.Q_THEMES, lang)
-    dfThemes = dfThemes.groupby('Indicator_NId').apply(lambda x: ','.join(x.THEMES))
-    tmpdf = pd.DataFrame()
-    tmpdf['THEMES'] = dfThemes
-    dfThemes = tmpdf
+    if len(dfThemes) > 0:
+        dfThemes = dfThemes.groupby('Indicator_NId').apply(lambda x: ','.join(x.THEMES))
+        tmpdf = pd.DataFrame()
+        tmpdf['THEMES'] = dfThemes
+        dfThemes = tmpdf
 
     print("mapping...")
     # A set of joins to generate the final table
