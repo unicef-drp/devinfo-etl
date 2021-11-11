@@ -130,10 +130,11 @@ def extract_dataframe(access_database, lang):
 
     # extracts the goals table
     dfGoals = db.get_dataframe(db_read.Q_GOALS, lang)
-    dfGoals = dfGoals.groupby('Indicator_NId').apply(lambda x: ','.join(x.GOALS))
-    tmpdf = pd.DataFrame()
-    tmpdf['GOALS'] = dfGoals
-    dfGoals = tmpdf
+    if len(dfGoals):
+        dfGoals = dfGoals.groupby('Indicator_NId').apply(lambda x: ','.join(x.GOALS))
+        tmpdf = pd.DataFrame()
+        tmpdf['GOALS'] = dfGoals
+        dfGoals = tmpdf
 
     # extracts the themes table
     dfThemes = db.get_dataframe(db_read.Q_THEMES, lang)

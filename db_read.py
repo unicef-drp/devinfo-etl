@@ -102,7 +102,7 @@ where c.IC_Type = 'TH' and c.IC_Parent_NId <> -1) as cat
 class DbRead:
     database_path = None
     connStr = (
-        r"Driver={{Microsoft Access Driver (*.mdb)}};"
+        r"DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};"
         r"DBQ={};"
     )
 
